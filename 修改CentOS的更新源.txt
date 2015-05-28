@@ -1,0 +1,66 @@
+修改CentOS的更新源
+本文以CentOS5.3的上海交大更新源为例：
+1．修改/etc/yum.repos.d/CentOS-Base.repo为:
+[base]
+name=CentOS-5-Base
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever5&arch=$basearch&
+repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/os/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#released updates
+[update]
+name=CentOS-5-Updates
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=updates
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/updates/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#packages used/produced in the build but not released
+[addons]
+name=CentOS-5-Addons
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=addons
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/addons/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#additional packages that may be useful
+[extras]
+name=CentOS-5-Extras
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=extras
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/extras/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-5-Plus
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=centosplus
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#contrib-packages by Centos Users
+[contrib]
+name=CentOS-5-Contrib
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=contrib
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/contrib/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+2．校验Key导入：执行
+rpm --import http://ftp.sjtu.edu.cn/centos/5.3/os/i386/RPM-GPG-KEY-CentOS-5
+
+3．进行升级：执行
+yum update
+Ok了，搞定。
+
+小小标注一下：rpm -ivh --aid 是可以安装RPM帮忙解决依赖问题的命令
+……总是忘……这个和本文无关……
+
+作者：gnuhpc
+出处：http://www.cnblogs.com/gnuhpc/

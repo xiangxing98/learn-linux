@@ -1,0 +1,101 @@
+CentOS6.5升级到CentOS7
+ redhat提供了一个redhat-upgrade-tool的升级工具；
+
+[1]配置软件源
+  	
+# vim /etc/yum.repos.d/upgrade.repo
+[upgrade]
+name=upgrade
+baseurl=http://dev.centos.org/centos/6/upg/x86_64/
+enable=1
+gpgcheck=0
+
+[2]安装软件工具
+  	
+yum -y install preupgrade-assistant-contents redhat-upgrade-tool preupgrade-assistant
+
+[3]升级前检查潜在问题
+  	
+# preupg
+Preupg tool doesn't do the actual upgrade.
+Please ensure you have backed up your system and/or data in the event of a failed upgrade
+that would require a full re-install of the system from installation media.Do you want to continue? y/n
+y
+Gathering logs used by preupgrade assistant:
+All installed packages : 01/10 ...finished (time 00:00s)
+All changed files      : 02/10 ...finished (time 00:40s)
+Changed config files   : 03/10 ...finished (time 00:00s)
+All users              : 04/10 ...finished (time 00:00s)
+All groups             : 05/10 ...finished (time 00:00s)
+Service statuses       : 06/10 ...finished (time 00:00s)
+All installed files    : 07/10 ...finished (time 00:01s)
+All local files        : 08/10 ...finished (time 00:03s)
+All executable files   : 09/10 ...finished (time 00:00s)
+RedHat signed packages : 10/10 ...finished (time 00:00s)
+Assessment of the system, running checks / SCE scripts:
+001/100 ...done    (Configuration Files to Review)
+002/100 ...done    (File Lists for Manual Migration)
+003/100 ...done    (Bacula Backup Software)
+004/100 ...done    (MySQL configuration)
+005/100 ...done    (Migration of the MySQL data stack)
+006/100 ...done    (General changes in default MySQL implementation)
+007/100 ...done    (PostgreSQL upgrade content)
+Assessment finished (time 00:00s)
+Result table with checks and their results for main contents:
+------------------------------------------------------------------------------------------
+|System kickstart                                                        |notapplicable  |
+|YUM                                                                     |notapplicable  |
+|Check for usage of dangerous range of UID/GIDs                          |notapplicable  |
+|Incorrect usage of reserved UID/GIDs                                    |notapplicable  |
+|NIS ypbind config files back-up                                         |notapplicable  |
+|NIS Makefile back-up                                                    |notapplicable  |
+|NIS server maps check                                                   |notapplicable  |
+|NIS server MAXUID and MAXGID limits check                               |notapplicable  |
+|NIS server config file back-up                                          |notapplicable  |
+------------------------------------------------------------------------------------------
+Tarball with results is stored here /root/preupgrade-results/preupg_results-140716022514.tar.gz .
+The latest assessment is stored in directory /root/preupgrade .
+Upload results to UI by command:
+e.g. preupg -u http://127.0.0.1:8099/submit/ -r /root/preupgrade-results/preupg_results-*.tar.gz .
+
+[4]开始升级
+  	
+# rpm --import http://centos.excellmedia.net/7.0.1406/os/x86_64/RPM-GPG-KEY-CentOS-7
+
+正常的运行以上命令可以升级完成；
+  	
+# redhat-upgrade-tool --network 7.0 --instrepo http://centos.excellmedia.net/7.0.1406/os/x86_64/
+
+这强制的就显得有点不友好了，生产环境慎用；
+
+更新到这一步：
+  	
+setting up repos...
+.treeinfo                                                                                                | 1.1 kB     00:00
+getting boot images...
+vmlinuz-redhat-upgrade-tool                                                                              | 4.7 MB     01:38
+initramfs-redhat-upgrade-tool.img                                                                        |  32 MB     14:45
+setting up update...
+finding updates 100% [=====================================================================================================]
+(1/272): acl-2.2.51-12.el7.x86_64.rpm                                                                    |  81 kB     00:00
+(2/272): attr-2.4.46-12.el7.x86_64.rpm                                                                   |  66 kB     00:00
+(3/272): audit-2.3.3-4.el7.x86_64.rpm                                                                    | 223 kB     00:01
+(4/272): audit-libs-2.3.3-4.el7.x86_64.rpm                                                               |  77 kB     00:00
+(5/272): authconfig-6.2.8-8.el7.x86_64.rpm                                                               | 399 kB     00:08
+(6/272): basesystem-10.0-7.el7.centos.noarch.rpm                                                         | 5.0 kB     00:00
+(7/272): bash-4.2.45-5.el7.x86_64.rpm                                                                    | 1.0 MB     00:17
+(270/272): yum-plugin-fastestmirror-1.1.31-24.el7.noarch.rpm                                             |  28 kB     00:03
+(271/272): zlib-1.2.7-13.el7.x86_64.rpm                                                                  |  89 kB     00:06
+(272/272): zlib-devel-1.2.7-13.el7.x86_64.rpm                                                            |  49 kB     00:01
+ 
+setting up system for upgrade
+Finished. Reboot to start upgrade.
+  	
+# reboot
+
+[5]升级完成:
+  	
+# cat /etc/redhat-release 
+CentOS Linux release 7.0.1406 (Core)
+
+本文出自 “西伯利亚·狼” 博客，请务必保留此出处http://kernal.blog.51cto.com/8136890/1532150

@@ -1,0 +1,124 @@
+Centos更新163源
+Reference: http://mirrors.163.com/.help/centos.html
+ 
+1. 备份现在的源文件/etc/yum.repos.d/CentOS-Base.repo
+cd /etc/yum.repos.d/
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+#mv: 无法将"/etc/yum.repos.d/CentOS-Base.repo" 移动至"/etc/yum.repos.d/CentOS-Base.repo.bak": 
+#权限不够
+sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+#mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+#sudo gedit /etc/sudoers
+#sudo gedit  /etc/yum.repos.d/CentOS-Base.repo
+
+2.   下载163源
+下载对应版本repo文件, 放入/etc/yum.repos.d/(操作前请做好相应备份)
+#for CentOS6 http://mirrors.163.com/.help/CentOS6-Base-163.repo
+cd /etc/yum.repos.d/
+wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
+#无法写入 “CentOS6-Base-163.repo” (权限不够)。
+sudo wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
+
+3. 把下载文件改成源文件 
+mv CentOS6-Base-163.repo CentOS-Base.repo
+ 
+4. 更新列表,运行以下命令生成缓存
+yum clean all
+yum makecache
+ 
+5. 更新系统 
+yum update
+
+#add other update mirrors
+ls -l /etc/yum.repos.d/CentOS-Base.repo
+#-rw-r--r--
+sudo chmod 777 /etc/yum.repos.d/CentOS-Base.repo
+ls -l /etc/yum.repos.d/CentOS-Base.repo
+#-rwxrwxrwx
+sudo gedit  /etc/yum.repos.d/CentOS-Base.repo
+
+从以上配置文件CentOS-Base.repo可以看出，
+需要根据各家源情况
+有选择的配置 [base]  [updates]  [addons]  [extras]  [centosplus]  这几项。
+每一项只要修改baseurl 和gpgkey 为相应源地址即可。
+以上配置结束之后，要清空yum 缓存，并重建yum缓存，
+执行以下命令：
+yum clean all && yum clean metadata && yum clean dbcache && yum makecache && yum update
+
+
+保存退出，并恢复/etc/sudoers的访问权限为644
+sudo chmod 644 /etc/yum.repos.d/CentOS-Base.repo
+ll /etc/yum.repos.d/CentOS-Base.repo
+#ls -l /etc/yum.repos.d/CentOS-Base.repo
+-r--r-----. 1 root root 4030 12月  10 09:59 /etc/sudoers
+
+
+------------------------------------------------------------
+修改CentOS的更新源
+本文以CentOS5.3的上海交大更新源为例：
+1．修改/etc/yum.repos.d/CentOS-Base.repo为:
+[base]
+name=CentOS-5-Base
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever5&arch=$basearch&
+repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/os/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#released updates
+[update]
+name=CentOS-5-Updates
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=updates
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/updates/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#packages used/produced in the build but not released
+[addons]
+name=CentOS-5-Addons
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=addons
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/addons/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#additional packages that may be useful
+[extras]
+name=CentOS-5-Extras
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=extras
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/extras/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-5-Plus
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=centosplus
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+#contrib-packages by Centos Users
+[contrib]
+name=CentOS-5-Contrib
+#mirrorlist=http://mirrorlist.centos.org/?release=4&arch=$basearch&repo=contrib
+baseurl=http://ftp.sjtu.edu.cn/centos/5.3/contrib/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5
+
+2．校验Key导入：执行
+rpm --import http://ftp.sjtu.edu.cn/centos/5.3/os/i386/RPM-GPG-KEY-CentOS-5
+
+3．进行升级：执行
+yum update
+Ok了，搞定。
+
+小小标注一下：rpm -ivh --aid 是可以安装RPM帮忙解决依赖问题的命令
+……总是忘……这个和本文无关……
+
+作者：gnuhpc
+出处：http://www.cnblogs.com/gnuhpc/
+
+

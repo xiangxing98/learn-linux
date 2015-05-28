@@ -1,0 +1,32 @@
+删除centos6.X升级后留下多余内核
+ 
+1.首先列出系统中正在使用的内核:
+# sudo uname -a
+Linux siqin.hou 2.6.32-504.3.3.el6.i686 #1 SMP Tue Dec 16 22:55:44 UTC 2014 i686 i686 i386 GNU/Linux
+
+2.查询系统中全部的内核:
+# sudo rpm -q kernel
+kernel-2.6.32-431.1.2.0.1.el6.i686
+kernel-2.6.32-431.5.1.el6.i686
+kernel-2.6.32-431.20.3.el6.i686
+kernel-2.6.32-431.29.2.el6.i686
+kernel-2.6.32-504.3.3.el6.i686
+
+3.删除掉不再需要的老版本内核:
+(注意不要删除当前使用的内核)
+sudo rpm -e kernel-2.6.32-279.2.1.el6.x86_64
+sudo rpm -e kernel-2.6.32-431.1.2.0.1.el6.i686
+rm -f /var/lib/rpm/__db.*
+rpm --rebuilddb
+yum clean all
+warning: waiting for transaction lock on /var/lib/rpm/.rpm.lock
+re-run: sudo rpm -e kernel-2.6.32-431.1.2.0.1.el6.i686
+error: package kernel-2.6.32-431.1.2.0.1.el6.i686 is not installed
+sudo rpm -e kernel-2.6.32-431.5.1.el6.i686
+sudo rpm -e kernel-2.6.32-431.20.3.el6.i686
+sudo rpm -e kernel-2.6.32-431.29.2.el6.i686
+
+4.重启后就可以看到,内核被删掉了,同时多余的启动项也自动被删掉了.
+
+5.升级内核
+
