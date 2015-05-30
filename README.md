@@ -1,8 +1,10 @@
-# CentOS Recipes
+ # CentOS Recipes
 
 ### Add Linux
 http://www.sublimetext.com/3
+
 http://linux.vbird.org/
+
 http://vbird.dic.ksu.edu.tw/
 
 ### …or create a new repository on the command line
@@ -47,8 +49,8 @@ Repository for learning linux in general and CentOS specifics. This repository c
 ### How do I install Poppler PDF Utilities?
 Just run `sudo yum install poppler-utils.x86_64`. This will allow you to use to following commands:
 ```
-pdfdetach    pdffonts     pdfimages    pdfinfo      pdfroff      
-pdfseparate  pdftocairo   pdftohtml    pdftoppm     pdftops      
+pdfdetach    pdffonts     pdfimages    pdfinfo      pdfroff
+pdfseparate  pdftocairo   pdftohtml    pdftoppm     pdftops
 pdftotext    pdfunite
 ```
 
@@ -69,11 +71,11 @@ sudo yum install mysql-server -y
 sudo /etc/init.d/mysqld start
 mysqladmin -u root password 'rootPassword'
 sudo chkconfig mysqld on
- 
+
 # my.cnf should be located at; /etc/my.cnf
-# add the following line to allow external connections; 
+# add the following line to allow external connections;
 # bind-address = 0.0.0.0
-# then restart mysql to reload configurations; 
+# then restart mysql to reload configurations;
 # sudo /etc/init.d/mysqld restart
 ```
 
