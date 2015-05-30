@@ -1,5 +1,10 @@
 # CentOS Recipes
 
+### Add Linux
+http://www.sublimetext.com/3
+http://linux.vbird.org/
+http://vbird.dic.ksu.edu.tw/
+
 ### …or create a new repository on the command line
 ```
 echo "# learn-centos" >> README.md
