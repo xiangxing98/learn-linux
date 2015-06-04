@@ -7,6 +7,11 @@ http://linux.vbird.org/
 
 http://vbird.dic.ksu.edu.tw/
 
+### Add CentOS site
+http://www.centoscn.com/
+
+http://www.iplaysoft.com
+
 ### …or create a new repository on the command line
 ```
 echo "# learn-centos" >> README.md
