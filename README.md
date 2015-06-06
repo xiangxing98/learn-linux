@@ -1,5 +1,7 @@
  # CentOS Recipes
 
+[罗辑思维记录](http://www.ljsw.cc/)
+
 ### Add Linux
 http://www.sublimetext.com/3
 
