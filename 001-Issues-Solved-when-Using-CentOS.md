@@ -21,3 +21,5 @@ yum clean dbcache
 yum makecache
 ```
 即先删除原数据和数据库缓存，然后重建之，问题即可解决
+OR below code is also ok
+`yum clean all` 
