@@ -1,6 +1,21 @@
- # CentOS Recipes
+# CentOS Recipes
 
 [罗辑思维记录](http://www.ljsw.cc/)
+
+### About me
+
+我就是我，我懂我爱我。
+思考-行动，勤奋-专业
+https://github.com/xiangxing98
+http://www.worldhello.net/gotgithub/
+2015-06 GITHUB+R+VBA
+2015-05 DSS+GIT+GITHUB+R
+2015-04 JHU DS +ggplot2 + R
+2015-03 Getting and Cleaning Data-Coursera
+2015-03 在读古典的《拆掉思维里的墙》
+2015-02 罗辑思维：过往不念，当下不杂，未来不惧。
+2015 MOOC+Coursera+慕课+网易云课堂study.163.com+果壳慕课学院
+http://www.douban.com/people/xiangxing98/
 
 ### Add Linux
 http://www.sublimetext.com/3
