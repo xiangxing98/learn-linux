@@ -88,3 +88,43 @@ cd /etc/yum.repos.d/
 wget http://pkgrepo.linuxtech.net/el6/release/linuxtech.repo
 yum --enablerepo=linuxtech-testing install vlc
 ```
+
+### centos系统安装中文字体几种方法
+安装的思路是将windows中的字体拷贝到centos中，然后执行几个命令即可。
+windows xp中字体位于C:/WINDOWS/Fonts目录中，每中字体一个文件，比如simsun.ttc
+centos中的字体文件位于/usr/share/fonts/,每种字体一个目录，比如wqy-zenhei
+安装过程是，首先在centos的/usr/share/fonts/目录下新建simsun目录
+然后将windows中的simsun.ttc拷贝到/usr/share/fonts/simsun目录
+
+```bash
+#mkdir /usr/share/fonts/simsun
+##拷贝windows中的simsun.ttc到/usr/share/fonts/simsun/
+
+然后执行以下命令
+
+#cd /usr/share/fonts/simsun
+#mkfontscale
+#mkfontdir
+#fc-cache -fv
+ 
+执行以下命令让字体生效
+
+#source /etc/profile
+```
+
+为了让应用程序重新使用新的字体，你可能需要重启你的应用。必要的情况下修改代码
+
+##### 补充，如果上面安装失败我们可参考下面方法
+1. 修改字体文件的权限，使root用户以外的用户也可以使用
+```
+# cd /usr/share/fonts/chinese/TrueType
+# chmod 755 *.ttf
+```
+2. 建立字体缓存
+```
+# mkfontscale （如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ）
+# mkfontdir
+# fc-cache -fv （如果提示 fc-cache: command not found，则需要安装# yum install fontconfig ）
+```
+3. 重启计算机
+`# reboot`
