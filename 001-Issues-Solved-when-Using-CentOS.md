@@ -22,7 +22,7 @@ yum makecache
 ```
 即先删除原数据和数据库缓存，然后重建之，问题即可解决
 OR below code is also ok
-`yum clean all` 
+`yum clean all`
 
 ## Add centOS repository-yum添加网易/搜狐源
 先进入yum源配置目录
@@ -38,7 +38,7 @@ http://mirrors.sohu.com/help/CentOS-Base-sohu.repo
 运行yum makecache生成缓存
 更新玩yum源后，建议更新一下，使操作立即生效
 `yum makecache`
- 
+
 ## 为CentOS安装EPEL软件仓库
 EPEL全称: Extra Packages for Enterprise Linux.传说中最全的yum源
 通过以下命令安装:
@@ -80,7 +80,7 @@ sohu的yum源
 `wget http://lug.ustc.edu.cn/wiki/_export/code/mirrors/help/centos?codeblock=2`
 
 ## CentOS6.3安装VLC media player
-2012/12/25Linux运维centos、Linux、redhatbear	
+2012/12/25Linux运维centos、Linux、redhatbear
 VLC media player是Linux系统里一个很受欢迎的视频播放器，在Ubuntu软件中心里，这款播放器的下载量非常巨大，可见其受欢迎的程度。下面是在CentOS6.3系统安装VLC media player的过程。
 ```
 su - root
@@ -106,7 +106,7 @@ centos中的字体文件位于/usr/share/fonts/,每种字体一个目录，比�
 #mkfontscale
 #mkfontdir
 #fc-cache -fv
- 
+
 执行以下命令让字体生效
 
 #source /etc/profile
@@ -128,3 +128,5 @@ centos中的字体文件位于/usr/share/fonts/,每种字体一个目录，比�
 ```
 3. 重启计算机
 `# reboot`
+
+just a test
