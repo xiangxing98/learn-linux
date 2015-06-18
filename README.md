@@ -8,7 +8,7 @@
 思考-行动，勤奋-专业
 https://github.com/xiangxing98
 http://www.worldhello.net/gotgithub/
-2015-06-15 kindle paperwhites
+2015-06-15 kindle paperwhites, thanks jd.com
 2015-06 GITHUB+R+VBA
 2015-05 DSS+GIT+GITHUB+R
 2015-04 JHU DS +ggplot2 + R
