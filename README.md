@@ -17,6 +17,7 @@ http://www.worldhello.net/gotgithub/
 2015-02 罗辑思维：过往不念，当下不杂，未来不惧。
 2015 MOOC+Coursera+慕课+网易云课堂study.163.com+果壳慕课学院
 http://www.douban.com/people/xiangxing98/
+[find ebook](http://www.panzz.com/)
 
 ### Add Linux
 http://www.sublimetext.com/3
