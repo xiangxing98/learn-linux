@@ -31,6 +31,10 @@ http://www.centoscn.com/
 
 http://www.iplaysoft.com
 
+- [aliyun_mirrors_centos](http://mirrors.aliyun.com/centos/7/isos/x86_64/)
+
+- [163_mirrors_centos](http://mirrors.163.com/centos/7/isos/x86_64/)
+
 ### …or create a new repository on the command line
 ```
 echo "# learn-centos" >> README.md
