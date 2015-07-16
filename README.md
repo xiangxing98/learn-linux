@@ -26,6 +26,9 @@ http://linux.vbird.org/
 
 http://vbird.dic.ksu.edu.tw/
 
+### Install 在XP下用U盘安装Ubuntukylin到硬盘的方法（双系统共存） 
+http://blog.sina.com.cn/s/blog_6b5f0c070101j4hm.html
+
 ### Add CentOS site
 http://www.centoscn.com/
 
