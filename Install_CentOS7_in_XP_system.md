@@ -59,3 +59,33 @@ chainloader +1
 ### END /etc/grub.d/30_os-prober ###
 保存文件。
 重启电脑，成功出现”Windows XP“（修改grub.cfg文件中取的名字）的启动windows的引导。
+
+方案三
+vim /boot/grub/grub.conf
+可以很清晰的看到CentOS启动系统时加载的grub菜单，因此，只要知道格式，自己编辑这个菜单就可以多系统引导了，很方便。
+
+由于系统安装的时候已经发现了other系统(windows),因此这里会多一个title Other，编辑一下，改成容易看懂的标题就可以了。如下
+
+#title Other
+#	rootnoverify (hd0,0)
+#	chainloader +1
+title Windows XP
+	root (hd0,0)
+	chainload +1
+
+title这里已经可以看到刚才改过的标题了。
+grub识别的硬盘，U盘都是hd，所以用root指定启动分区，(hd0,0)代表第一块硬盘的第一个分区，也就是windows xp所在的分区（C盘）。
+为什么是win xp&win 7？很明显，装完win7重启系统的时候我们已经发现了，win7把boot loader放在了sda1(c盘)，覆盖掉了XP的引导，而win7的系统盘sda2（D盘）上是没有引导文件的，无法引导系统。试试看，将grub菜单中改为root (hd0,1)会是什么情况？
+
+此时还未结束，进一步扩展grub引导，想开机默认引导win7，怎么办？
+grub中开头会有一个default=0参数，这个参数是指明grub默认引导哪一个title，0代表第一个，1代表第二个，以此类推。
+因此只需要把default=0改为default=1即可。
+继续vi /boot/grub/grub.conf，继续刚才未完成的事业吧。
+
+这次仔细观察了一下grub.conf，发现前面几个参数同样比较有意思。
+default=1 #默认引导第二个title，即windows XP&Windows 7
+timeout=5 #超时5秒，grub引导时5秒不做任何操作采用默认的default title引导系统
+splashimage=xxxxxx #grub背景图片，由于CentOS使用的是grub1版本，因此只支持640*480的图片，色深16色，而且必须压制成.gz，具体可以百度，这里不戏表。
+hiddenmenu #开机只显示default title和time out，隐藏掉启动菜单，这里注释掉了，为了看得更清楚一些。
+
+继续:wq之后reboot看效果
