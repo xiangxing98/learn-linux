@@ -1,0 +1,47 @@
+when I use the package "rstatscn" in ubuntu
+the console shows "package ‘rstatscn’ is not available (for R version 3.0.2)"
+
+so I want to update the R to the lastest relase ,google~~
+http://stackoverflow.com/questions/10476713/how-to-upgrade-r-in-ubuntu/
+---------------------------------------------------------------------------
+Follow the instructions from here
+
+1 sudo gedit /etc/apt/sources.list
+
+    This will open up your sources.list file in gedit,
+
+2 where you can add the following line.
+
+    deb http://cran.cnr.berkeley.edu/bin/linux/ubuntu version/
+    Replace version/ with whatever version of Ubuntu you are using (eg, precise/, oneric/, and so on). If you're getting a "Malformed line error", check to see if you have a space between /ubuntu/ and version/.
+
+3 Fetch the secure APT key with gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 or gpg --hkp://keyserver keyserver.ubuntu.com:80 --recv-key E084DAB9.
+
+4 Feed it to apt-key with gpg -a --export E084DAB9 | sudo apt-key add -
+
+5 Update your sources and upgrade your installation with sudo apt-get update && sudo apt-get upgrade.
+
+Since R is already installed, you should be able to upgrade it with this method.
+
+=====================================================
+arthur@Acer:~$ sudo subl /etc/
+Display all 230 possibilities? (y or n)
+arthur@Acer:~$ sudo subl /etc/apt/sources.list
+[sudo] password for arthur:
+arthur@Acer:~$ gpg --hkp://keyserver keyserver.ubuntu.com:80 --recv-key E084DAB9gpg: Invalid option "--hkp://keyserver"
+arthur@Acer:~$ gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg: directory `/home/arthur/.gnupg' created
+gpg: new configuration file `/home/arthur/.gnupg/gpg.conf' created
+gpg: WARNING: options in `/home/arthur/.gnupg/gpg.conf' are not yet active during this run
+gpg: keyring `/home/arthur/.gnupg/secring.gpg' created
+gpg: keyring `/home/arthur/.gnupg/pubring.gpg' created
+gpg: requesting key E084DAB9 from hkp server keyserver.ubuntu.com
+gpg: /home/arthur/.gnupg/trustdb.gpg: trustdb created
+gpg: key E084DAB9: public key "Michael Rutter <marutter@gmail.com>" imported
+gpg: Total number processed: 1
+gpg: imported: 1 (RSA: 1)
+arthur@Acer:~$ gpg -a --export E084DAB9 | sudo apt-key add -
+OK
+arthur@Acer:~$
+BUT the best answer is here:
+https://cran.r-project.org/bin/linux/ubuntu/README.html
