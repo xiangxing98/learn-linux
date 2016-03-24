@@ -25,11 +25,16 @@ Since R is already installed, you should be able to upgrade it with this method.
 
 =====================================================
 arthur@Acer:~$ sudo subl /etc/
+
 Display all 230 possibilities? (y or n)
+
 arthur@Acer:~$ sudo subl /etc/apt/sources.list
+
 [sudo] password for arthur:
+
 arthur@Acer:~$ gpg --hkp://keyserver keyserver.ubuntu.com:80 --recv-key E084DAB9gpg: Invalid option "--hkp://keyserver"
 arthur@Acer:~$ gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+
 gpg: directory `/home/arthur/.gnupg' created
 gpg: new configuration file `/home/arthur/.gnupg/gpg.conf' created
 gpg: WARNING: options in `/home/arthur/.gnupg/gpg.conf' are not yet active during this run
@@ -43,5 +48,35 @@ gpg: imported: 1 (RSA: 1)
 arthur@Acer:~$ gpg -a --export E084DAB9 | sudo apt-key add -
 OK
 arthur@Acer:~$
-BUT the best answer is here:
+
+BUT the best answer is here
+
 https://cran.r-project.org/bin/linux/ubuntu/README.html
+
+http://blog.sina.com.cn/s/blog_4aaba1b50102vofs.html
+
+1.首先更新sources.list
+cd /etc/apt/
+ sudo gedit sources.list
+ 2.更新软件源
+
+deb http://mirrors.ustc.edu.cn/CRAN/bin/linux/ubuntu/ precise/
+sudo apt-get update
+
+3.安装R语言
+
+sudo apt-get install r-base
+
+4.安装r-base-dev包
+sudo apt-get install r-base-dev
+
+5.使用R软件
+命令行下输入R
+
+6.命令行下输入
+#!/usr/bin/Rscript
+print("zjhello123.blog.163.com")
+
+输出显示 [1] "zjhello123.blog.163.com"
+
+至此，我们便完成了在ubuntu环境下安装R语言。
