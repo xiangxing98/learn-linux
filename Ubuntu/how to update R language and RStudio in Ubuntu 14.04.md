@@ -6,7 +6,9 @@ when I use the package "rstatscn" in ubuntu
 the console shows "package ‘rstatscn’ is not available (for R version 3.0.2)"
 
 so I want to update the R to the lastest relase ,google~~
+
 http://stackoverflow.com/questions/10476713/how-to-upgrade-r-in-ubuntu/
+
 ============================================================
 
 Follow the instructions from here
@@ -164,11 +166,15 @@ sudo apt-get install libquantlib0-dev
 ## 3、 安装RStudio
 ```
 sudo apt-get install gdebi
-```
-官网下载适用Ubuntu的rstudio的deb文件
 
-```
 #（需要在相关文件夹操作）
+## Install RStudio
+
+cd /home/stone/下载
+# 官网下载适用Ubuntu的rstudio的deb文件
+wget https://download1.rstudio.org/rstudio-0.99.893-amd64.deb
+gdebi rstudio-0.99.893-amd64.deb
+
 sudo gdebi rstudio-XXXX.deb
 ```
  
