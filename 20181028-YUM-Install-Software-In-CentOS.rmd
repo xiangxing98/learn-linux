@@ -14,7 +14,7 @@ output:
 ---
 
 # R Notebook-yum安装常用软件的命令
-> [20181028-YUM-Install-Software-In-CentOS.html](https://github.com/xiangxing98/learn-linux/20181028-YUM-Install-Software-In-CentOS.nb.html)
+> [20181028-YUM-Install-Software-In-CentOS.html](http://xiangxing98.github.io/learn-linux/20181028-YUM-Install-Software-In-CentOS.nb.html)
 
 ##  yum安装常用软件的命令
 

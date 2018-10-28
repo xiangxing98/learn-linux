@@ -1,9 +1,12 @@
 ---
-title: "Use_VIM_in_CentOS7"
-output: 
-  html_notebook: 
+title: "20181028-Use_VIM_in_CentOS7"
+output:
+  html_notebook:
     highlight: tango
     theme: journal
+    toc: yes
+  html_document:
+    df_print: paged
     toc: yes
 ---
 
@@ -12,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Use_VIM_in_CentOS7
-> [20181028-YUM-Install-Software-In-CentOS.html](https://github.com/xiangxing98/learn-linux/Use_VIM_in_CentOS7.nb.html)
+> [20181028-YUM-Install-Software-In-CentOS.html](https://github.com/xiangxing98/learn-linux/20181028-Use_VIM_in_CentOS7.nb.html)
 
 在centos中使用vim编辑器
 

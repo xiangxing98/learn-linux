@@ -1,0 +1,487 @@
+---
+title: "20181028-20181028-Install-R-RstudioServer-Git-In-CentOS7.rmd"
+output:
+  html_notebook:
+    highlight: tango
+    number_sections: yes
+    theme: paper
+    toc: yes
+    toc_depth: 4
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Notebook-20181028-Install-R-RstudioServer-Git-In-CentOS7
+> [20181028-Install-R-And_Rstudio-In-CentOS](http://xiangxing98.github.io/learn-linux//20181028-20181028-Install-R-RstudioServer-Git-In-CentOS7.nb.html)
+
+
+##  CentOS7安装R及Rstudio Server
+
+### 一、先来安装R
+
+#### 使用yum安装方式搭建R环境-推荐
+
+安装Extra Packages for Enterprise Linux (EPEL);安装EPEL可以使你更方便的从EPEL来安装R语言，而无需通过其他途径来安装R。如果你运行的是RedHat或CentOS系统的话，你也要安装EPEL来确保RStudio Server正常运行。
+
+CentOS7 64位版本安装EPEL的代码如下：
+```{bash}
+# sudo yum install  epel-release
+# 接下来运行： 
+# yum upgrade
+```
+
+EPEL成功安装后，使用以下代码便可以轻松的进行R语言的安装：
+```{bash}
+# sudo yum install R 
+```
+
+在Terminal试输入R，看能不能运行，可以的话就OK。不行的话就只能按自己出现的情况百度，google了。
+
+
+#### 使用源代码安装方式搭建R环境
+
+##### 1.下载R软件
+
+使用下面命令下载R软件
+```{bash}
+# wget http://mirror.bjtu.edu.cn/cran/src/base/R-3/R-3.0.1.tar.gz
+```
+
+##### 2.解压
+
+执行下列命令解压R软件，并切换到解压目录中。
+```{r}
+#解压命令
+# tar -zxvf R-3.0.1.tar.gz
+
+#切换目录
+# cd R-3.0.1                      
+```
+
+##### 3.安装
+
+安装R软件，并设置好工作路径，后面配环境变量时需要。
+```{r}
+# yum install readline-devel
+# yum install libXt-devel
+# mkdir -p /home/work/R
+# # 设置工作路径
+# ./configure --prefix=/home/work/R --enable-R-shlib 
+
+# 接下来执行代码安装：
+# make
+# make install
+```
+
+##### 4.配置环境变量
+
+此处的R路径为上面安装时的–prefix=/home/work/R
+```{bash}
+# #添加到PATH中： PATH=/home/work/R/bin:$PATH
+# vim ~/.bash_profile  
+# source ~/.bash_profile  
+```
+
+##### 5.测试
+
+```{bash}
+# R
+
+# R version 3.5.1 (2018-07-02) -- "Feather Spray"
+# Copyright (C) 2018 The R Foundation for Statistical Computing
+# Platform: x86_64-redhat-linux-gnu (64-bit)
+# 
+# R是自由软件，不带任何担保。
+# 在某些条件下你可以将其自由散布。
+# 用'license()'或'licence()'来看散布的详细条件。
+# 
+# R是个合作计划，有许多人为之做出了贡献.
+# 用'contributors()'来看合作者的详细情况
+# 用'citation()'会告诉你如何在出版物中正确地引用R或R程序包。
+# 
+# 用'demo()'来看一些示范程序，用'help()'来阅读在线帮助文件，或
+# 用'help.start()'通过HTML浏览器来看帮助文件。
+# 用'q()'退出R.
+
+```
+
+
+
+### 二、安装Rstudio Server
+
+去官网下载一个https://www.rstudio.com/products/rstudio/download-server/ 自己找找，总有一款适合你。我的系统是Centos 7 64bit。
+
+```{bash}
+# @2018-10-28我的是：
+# $ wget https://download2.rstudio.org/rstudio-server-rhel-1.1.456-x86_64.rpm
+# $ sudo yum install rstudio-server-rhel-1.1.456-x86_64.rpm
+
+# 两行命令查看是否安装成功
+# $ rstudio-server verify-installation
+# $ ps -aux | grep rstudio-server
+```
+
+[siqin@localhost ~]$ wget https://download2.rstudio.org/rstudio-server-rhel-1.1.456-x86_64.rpm
+--2018-10-28 17:37:25--  https://download2.rstudio.org/rstudio-server-rhel-1.1.456-x86_64.rpm
+正在解析主机 download2.rstudio.org (download2.rstudio.org)... 52.85.82.34, 52.85.82.209, 52.85.82.189, ...
+正在连接 download2.rstudio.org (download2.rstudio.org)|52.85.82.34|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：45678052 (44M) [application/x-redhat-package-manager]
+正在保存至: “rstudio-server-rhel-1.1.456-x86_64.rpm”
+
+100%[======================================>] 45,678,052  2.60MB/s 用时 16s    
+
+2018-10-28 17:37:43 (2.66 MB/s) - 已保存 “rstudio-server-rhel-1.1.456-x86_64.rpm” [45678052/45678052])
+
+### 三、在浏览器中启动Rstudio
+
+Linux下使用浏览器访问,可以开始R语言的学习了：
+http://[你的IP地址]:8787，例如http://192.168.1XX.XX:8787
+其中你的IP地址可以在linux下输入 ifconfig 获取。
+inet 192.168.140.128  
+netmask 255.255.255.0  
+broadcast 192.168.140.255
+
+输入账号密码后，浏览器出现Rstudio界面
+http://192.168.140.128:8787
+
+### 四、RStudio Server新建用户多人在线协作开发
+
+root用户无法登陆，新建一个用户进行登陆
+useradd -d /home/R -m R，创建用户的同时指定主目录
+passwd R，设置密码
+
+#### 增加新用户案例1
+
+```{bash}
+# ~ sudo groupadd hadoop 
+# ~ sudo useradd hadoop -g hadoop;
+# ~ sudo passwd hadoop 
+# ~ sudo adduser hadoop sudo
+# ~ sudo mkdir /home/hadoop 
+# ~ sudo chown -R hadoop:hadoop /home/hadoop
+```
+
+#### 测试账号设置成功
+```{bash}
+# ~ ssh hadoop@localhost
+# ~ bash
+# ~ pwd
+# /home/hadoop
+```
+
+新打开浏览器窗口通过 hadoop账号登陆
+
+#### 添加新用户 案例2
+
+添加用户的命令为：
+```{bash}
+# useradd username -u uid -p password
+```
+
+千万记得将uid设定为大于100的数字，大于500更好。
+
+也许你会发现使用新创建的用户名依然无法登录，至少我的情况是这样。对此，我找到了解决办法，即通过修改RStudio Server的用户组限制来解决。
+
+在设置用户组权限之前，必须先创建2个配置文件，RStudio Server在安装时不会自动创建这两个文件，必须手动操作。代码如下：
+```{bash}
+# $ touch /etc/rstudio/rserver.conf
+# $ touch /etc/rstudio/rsession.conf
+# $ ls
+```
+
+编辑rserver.conf文件并添加以下代码：
+```
+auth-required-user-group=rstudio_users
+```
+其中，你可以将“rstudio_users”命名为任何你想要的群组名字。
+
+接下来，将刚才新建立的用户名添加到该用户组：
+```{bash}
+# $ groupadd rstudio_users
+# $ usermod -g rstudio_users -G rstudio_users username
+# $ rstudio-server restart
+```
+
+重启RStudio Server之后，你会发现终于可以用新用户登录啦！赶紧来体验在iPad上操作R的感觉吧！
+
+还有一件事情必须注意噢！
+如果你使用其他电脑的浏览器来远程使用R的话，请确保至少采用以下版本的浏览器：
+
+- Firefox 10;
+
+- Safari 5.0;
+
+- Google Chrome 15.
+
+RStudio Server原生并不支持IE浏览器，但是你可以通过安装谷歌浏览器内嵌框架这个IE插件来实现IE操作。
+
+如果你希望了解更多部署RStudio Server的信息，请前往RStudio Server Website进行了解。
+
+### 五、RStudio Server配置
+
+RStudio有2个配置文件，但是默认情况下，这2个文件没有创建，如果我们要修改这个配置，需要先创建这2个文件：
+
+```{r}
+# [root@rac1 rstudio]# touch /etc/rstudio/rserver.conf
+# [root@rac1 rstudio]# touch /etc/rstudio/rsession.conf
+
+# [root@rac1 rstudio]# ls
+# installed rserver.conf  rsession.conf  secure-cookie-key
+
+```
+
+创建配置文件之后就可以进行修改，修改完毕之后可以使用命令来验证修改的有效性：
+
+[root@rac1 rstudio]# rstudio-server test-config
+
+注意：
+
+这个命令在启动和关闭RStudio server 时也会自动执行。当配置无效时，这个验证也会报错。
+
+#### 配置网络端口和地址
+
+默认的端口是8787，如果我们想改成其他端口，可以在/etc/rstudio/rserver.conf  文件中添加并修改参数：
+
+www-port=80
+
+--这里我们是将端口改成80.
+
+默认情况下，RStudio 是将IP地址绑定到0.0.0.0， 这样任何客户地址都可以访问。 我们可以改成其他地址，添加并修改参数：
+
+www-address=127.0.0.1
+
+修改完毕之后要验证参数有效性，并重启rstudio-server。
+```{bash}
+# [root@rac1 rstudio]# rstudio-server test-config
+# [root@rac1 rstudio]# rstudio-server restart
+# Stopping rstudio-server:                                   [  OK  ]
+# Starting rstudio-server:                                   [  OK  ]
+```
+
+#### 设置扩展库
+
+如果我们添加其他的library到默认LD_LIBRARY_PATH 中指定库，可以通过rsession-ld-library-path参数，在/etc/rstudio/rserver.conf 文件中添加external library的位置即可，如：
+
+rsession-ld-library-path=/opt/local/lib:/opt/local/someapp/lib
+
+#### 指定R 版本
+
+默认情况下，RStudio server 运行时使用的R是系统PATH中指定的R，这个位置可以使用which R确定，如果我们的系统上有多个版本的R，那么可以使用rsession-which-r参数指定RStudio 使用哪个版本的R。 如：
+
+rsession-which-r=/usr/local/bin/R
+
+在/etc/rstudio/rserver.conf文件里添加这个参数之后，必须重启rstudio server 才能生效。
+
+#### 设置用户限制
+
+如果有大量的用户使用，那么会消耗很多的资源，可以限制一些用户对资源的使用。
+
+在/etc/rstudio/rserver.conf文件中添加auth-required-user-group参数，可以指定访问rstudio 的用户：
+
+auth-required-user-group=rstudio_users
+
+## Git-Github集成-代码迭代与版本控制
+
+### 安装Git
+
+#### 方法一 源码安装Git
+
+```{bash}
+# ubuntu安装git
+# sudo apt-get install git
+
+# //先安装git依赖的包 
+# yum install zlib-devel 
+# yum install openssl-devel 
+# yum install perl 
+# yum install cpio 
+# yum install expat-devel 
+# yum install gettext-devel 
+# 
+# //安装autoconf 
+# yum install autoconf 
+# 
+# //安装git 
+# wget http://www.codemonkey.org.uk/projects/git-snapshots/git/git-latest.tar.gz 
+# tar xzvf git-latest.tar.gz 
+# cd git-{date} 
+# autoconf 
+# ./configure --with-curl=/usr/local 
+# make 
+# make install
+```
+
+#### 方法二推荐-yum安装epel后yum安装Git
+
+```{bash}
+# yum安装（epel源）
+# sudo yum install epel-release
+# yum install git  
+
+# 测试安装成功：
+# git --version
+```
+
+
+### Github的rsa私钥 & 公钥
+
+```{bash}
+# 生成rsa密钥对
+# ssh-keygen -t rsa
+
+# 查看公钥并把公钥并上传到github
+# cat /home/siqin/.ssh/id_rsa.pub
+
+# ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1ZsNi2Rew4z3aq6ALXo4LMz8w6gYLpAnb8RqqiLTjTqVHqJapC8lVgqTciJ54ShpCD8/BFqmCWwx4LgiVWnJOyCkXKLFhS2rlr9qJlkfKgXqzaxOV2ZtdpC50VyIHWOLaFMWLQY9EP+kMU9Po399WNOryThD9KrfF34z7kj43SnMmK3zZzSd+1irb7s4UmjVaAy4O3nWMA56vO5AAHLkOdfWA9oswdF23mgaXafHG6+G07OtuAHJTx1jdg0XkHPSxOKGrNxDrhR8KKEbSz8Sc2X/gwmBr6pUx5R2wHbmatNXrAAyIKw5RMPmxBaVNCf9t/1tSdnZxmRmHSaKv4iX3 siqin@localhost.localdomain
+```
+
+### 配置用户名与邮箱
+
+```{bash}
+# git config --global user.name "xiangxing98"
+# git config --global user.email "xiangxing985529@163.com"
+```
+
+
+### 创建一个项目并联系上Github
+
+Clone Git Repository
+
+Repository URL:
+git@github.com:xiangxing/rstudio-test.git
+
+Or https://github.com/xiangxing98/learn-linux
+
+Project direction name:
+rstudio-test
+
+Create project as subdirectory of:
+~/siqin/project
+
+
+绑定本定项目和learn-linux
+```{r}
+# ~ cd /home/siqin/R_Data_Science/learn-linux
+# ~ touch README.md
+# ~ echo Start-data-analyse >> README.md
+# ~ git init
+# ~ git add .
+# ~ git commit -m 'first comment'
+# ~ git remote add origin git@github.com:xiangxing98/learn-linux.git
+# ~ git push -u origin master
+
+# Push an existing repository from the command line
+# git remote add origin git@github.com:xiangxing98/learn-linux.git
+# git push -u origin master
+```
+
+
+打开RStudio设置到/home/siqin/R_Data_Science/learn-linux目录，
+tools–>version control –> project setup
+
+在RStudio中修改sayHello.r的代码
+
+
+sayHello<-function(name){
+  print(paste("hello",name))
+}
+
+sayHello("Siqin")
+sayHello("World")
+
+提交：点击tools–>version control–> commit
+
+上传到github：点击tools–>version control–> push
+
+RStudio有如此强大的功能，极大的降低了编程的门槛。还没有用过的同学，赶紧去体验一把吧。极客的感觉！
+
+ 
+### 云平台中的RStudio
+
+如果有同道中人想进一步折腾可以考虑和云平台相接合，例如EC2。
+Amazon EC2是Amazon Web Services（简称Aws）中的一个主要产品。 
+Amazon EC2可以看作是一台云主机，云主机上不仅可以搭建网站，也可以运行RStudio Sever。
+目前Amazon对微型主机提供了新注册用户免费试用一年的活动，爱折腾的同学可以试试。
+当然国内的盛大云也有超微型主机提供，一年400多元，比较适合个人或小型公司使用。
+ 
+#### 使用浏览器运行R的好处
+
+- 你可以从任何一台能上网的计算机去操作R
+
+- 共享代码、数据和其它文档
+
+- 多用户共享高性能计算资源与协同工作
+
+- 集中管理R扩展包
+
+设想一下，你作为公司数据分析师到客户那里做咨询或培训，
+使用客户电脑和RStudio Server就能直接利用公司主机上的数据集和程序代码作演示，
+而不必携带厚重的笔记本出差，这样岂不轻松又显得有科技含量。
+
+## 报错解决方案记录
+
+### UNABLE TO CONNECT TO SERVICE
+
+报错： 解決登入 DOCKER 的 RSTUDIO 遇到錯誤 RSTUDIO INITIALIZATION ERROR: UNABLE TO CONNECT TO SERVICE。打開瀏覽器網址: http://localhost:8787/
+在 Username 與 Password 輸入剛剛建立的帳號密碼，卻遇到錯誤 Rstudio Initialization Error: Unable to connect to service
+
+#### 解決方式：
+
+法1: 不需要額外建立帳號，直接輸入預設的帳號 rstudio 與密碼 rstudio
+法2: 啟動 Container 指定帳號密碼。
+(如果 Container 已經啟動，需要停止，避免衝到相同 port )
+
+#### 综合参考博客：
+
+1、http://www.linuxidc.com/Linux/2012-02/54610.htm
+
+2、http://blog.fens.me/r-rstudio-server/
+
+3、http://www.hawkinqian.com/zh/r-cloud-deploying-rstudio-server/
+
+
+### 安装tidyverse出现的错误-退出狀態的值不是0
+
+```{r}
+# install.packages(c("xml2","httr","rvest"))
+# install.packages(c("rmarkdown","xml2","httr","rvest","tidyverse","bookdown","bookdownplus"))
+```
+
+#### 解决方法
+```{bash}
+# XML 包退出狀態的值不是0
+# sudo yum install libxml*
+# 或者
+# sudo yum install libxml2-devel
+
+# 其他是httr 以及日vest包退出狀態的值不是0的解决方案
+# sudo yum install openssl-devel
+# sudo yum install libcurl-devel
+```
+
+
+### 安装REmap出现的错误dependency ‘XML’ is not available for package ‘REmap’
+
+```{r}
+# library("devtools")
+# install_github('lchiffon/REmap')
+# dependency ‘XML’ is not available for package ‘REmap’
+```
+
+#### 解决方法
+```{r}
+# install.packages("XML")
+```
+
+
+
+
+
+
