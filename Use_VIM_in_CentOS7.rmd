@@ -1,0 +1,87 @@
+---
+title: "Use_VIM_in_CentOS7"
+output: 
+  html_notebook: 
+    highlight: tango
+    theme: journal
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Use_VIM_in_CentOS7
+
+在centos中使用vim编辑器
+
+下面用编辑crontab举个例子：
+
+在命令行输入
+
+crontab -e
+
+会直接进入vim编辑模式编辑crontab文件。
+
+随后可以输入“i”进入insert模式
+
+然后移动光标在指定的位置添加文字，可以按“esc”键先进入Normal Mode，在Normal Mode下输入“：”进入Command-line，在Command-line下输入“x”保存并且退出完成编辑。
+
+下面为常用命令
+
+## 1、Normal Mode -> Insert Mode
+
+i 小写字母i，在光标位置插入
+
+a 小写字母a，在光标的下一个位置插入
+
+I 大写字母I，在光标所在行的第一个非空格处插入
+
+A 大写字母A，在光标所在行的最后一个字符处插入
+
+o 小写字母o，在光标所在行的下一行处插入新行
+
+O 大写字母O，在光标所在行的上一行处插入新行
+
+r 小写字母r，替换光标所在处的字符一次
+
+R 大写字母R，持续替换光标所在处的字符，直到按下ESC
+
+
+
+## 2、Normal Mode -> Command-line Mode
+
+:/filename 搜索字符串
+
+:w 保存文件
+
+:w! 强制保存文件（前提是用户有修改文件访问权限的权限）
+
+:q 退出缓冲区
+
+:q! 强制退出缓冲区而不保存
+
+:wq 保存文件并退出缓冲区
+
+:ZZ  保存文件并且退出
+
+:wq! 强制保存文件并退出缓冲区（前提是用户有修改文件访问权限的权限）
+
+:w <filename> 另存为名为filename文件
+
+:n1,n2 w <filename> 将n1行到n2行的数据另存为名为filename文件
+
+: x 如果文件有更改，则保存后退出。否则直接退出。
+
+
+
+## 3、Insert Mode -> Normal Mode
+
+按下ESC键
+
+
+
+## 4、Command-line -> Normal Mode
+
+按下ESC键
+
