@@ -1,5 +1,14 @@
 # CentOS Recipes
 
+[Learn-Linux site](http://xiangxing98.github.io/learn-linux/)
+
+[20181028-Install-R-RstudioServer-Git-In-CentOS7](http://xiangxing98.github.io/learn-linux/20181028-Install-R-RstudioServer-Git-In-CentOS7.nb.html)
+
+[20181028-Use_VIM_in_CentOS7.nb.html](http://xiangxing98.github.io/learn-linux/20181028-Use_VIM_in_CentOS7.nb.html)
+
+[20181028-YUM-Install-Software-In-CentOS.nb.html](http://xiangxing98.github.io/learn-linux/20181028-YUM-Install-Software-In-CentOS.nb.html)
+
+
 [罗辑思维记录](http://www.ljsw.cc/)
 
 ### About me
