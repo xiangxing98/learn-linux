@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Use_VIM_in_CentOS7
+> [20181028-YUM-Install-Software-In-CentOS.html](https://github.com/xiangxing98/learn-linux/Use_VIM_in_CentOS7.nb.html)
 
 在centos中使用vim编辑器
 
