@@ -8,6 +8,7 @@
 
 [20181028-YUM-Install-Software-In-CentOS.nb.html](http://xiangxing98.github.io/learn-linux/20181028-YUM-Install-Software-In-CentOS.nb.html)
 
+[20181029-Linux_Basics_Questions](http://xiangxing98.github.io/learn-linux//20181029-Linux_Basics_Questions.nb.html)
 
 [罗辑思维记录](http://www.ljsw.cc/)
 
