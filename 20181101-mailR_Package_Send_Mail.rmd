@@ -1,0 +1,62 @@
+---
+title: "20181101-mailR_Package_Send_Mail"
+output:
+  html_notebook:
+    css: rmd_theme.css
+    highlight: monochrome
+    theme: readable
+    toc: yes
+    toc_depth: 4
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Notebook-20181101-mailR_Package_Send_Mail
+> [20181029-Linux_Basics_Questions](http://xiangxing98.github.io/learn-linux/20181101-mailR_Package_Send_Mail.nb.html)
+
+
+```{r}
+# MyEmail.R
+tryCatch({
+  library(mailR)
+}, error = function(e) {
+  print("NO mailR Packages")
+  print(conditionMessage(e))#打印错误信息
+  install.packages("mailR")#没有包则安装
+}, finally = {
+  library(mailR)
+})
+
+sender <- "l2532101023@163.com"#发送的邮箱
+recipients <- c("l2532101023@163.com") #接受者的邮箱
+send.mail(
+  from = sender,
+  to = recipients,
+  subject = "Try mailR package",
+  #邮件主题
+  body = "Get it",
+  smtp = list(
+    host.name = "smtp.163.com",
+    port = 465,
+    user.name = "l2532101023@163.com",
+    passwd = "******",
+    ssl = TRUE
+  ),
+  authenticate = TRUE,
+  send = TRUE,
+  encoding = "utf-8",
+  attach.files = c("./Learning_R/附件.txt")#添加附件
+)
+```
+
+
+[1] [R语言之mailR包](http://blog.sina.com.cn/s/blog_acedc4830102w6rb.html)
+
+[2] [用R语言发送邮件(mailR包)](http://blog.csdn.net/Joshua_HIT/article/details/57405541)
+

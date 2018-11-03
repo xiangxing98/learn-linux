@@ -1,0 +1,342 @@
+---
+title: "20181103-Configure_YUM_Repository_And_EPEL_Repository_In_CentOS7"
+output:
+  html_notebook:
+    css: rmd_theme.css
+    highlight: monochrome
+    theme: paper
+    toc: yes
+    toc_depth: 4
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 20181103-Configure_YUM_Repository_And_EPEL_Repository_In_CentOS7
+
+# [CentOS7系统配置国内yum源和epel源](https://www.cnblogs.com/renpingsheng/p/7845096.html)
+
+> https://www.cnblogs.com/renpingsheng/p/7845096.html
+
+### 1.首先进入`/etc/yum.repos.d/`目录下，新建一个repo_bak目录，用于保存系统中原来的repo文件
+
+```{bash}
+[root@bogon ~]# cd /etc/yum.repos.d/
+
+[root@bogon yum.repos.d]# mkdir repo_bak
+
+[root@bogon yum.repos.d]# mv *.repo repo_bak/
+```
+
+### 2.在CentOS中配置使用网易和阿里的开源镜像
+
+到网易和阿里开源镜像站点下载系统对应版本的repo文件
+
+```{bash}
+[root@bogon yum.repos.d]# wget http://mirrors.aliyun.com/repo/Centos-7.repo
+
+[root@bogon yum.repos.d]# wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
+
+[root@bogon yum.repos.d]# ls
+Centos-7.repo  CentOS-Base-163.repo  repo.bak
+```
+
+或者手动下载repo文件并上传到`/etc/yum.repos.d/`目录
+
+[网易开源镜像站](http://mirrors.163.com/.help/centos.html)
+
+[阿里开源镜像站](https://opsx.alibaba.com/mirror?lang=zh-cn)
+
+### 3.清除系统yum缓存并生成新的yum缓存
+
+```{bash}
+[root@bogon yum.repos.d]# ls        # 列出/etc/yum.repos.d/目录下的文件
+Centos-7.repo  CentOS-Base-163.repo  repo.bak
+
+[root@bogon yum.repos.d]# yum clean all     # 清除系统所有的yum缓存
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Cleaning repos: base extras updates
+Cleaning up everything
+Cleaning up list of fastest mirrors
+
+[root@bogon yum.repos.d]# yum makecache     # 生成yum缓存
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+base                                                                                  | 3.6 kB  00:00:00     
+extras                                                                                | 3.4 kB  00:00:00     
+updates                                                                               | 3.4 kB  00:00:00     
+(1/12): base/7/x86_64/filelists_db                                                    | 6.7 MB  00:00:02     
+(2/12): base/7/x86_64/group_gz                                                        | 156 kB  00:00:02     
+(3/12): base/7/x86_64/other_db                                                        | 2.5 MB  00:00:01     
+(4/12): base/7/x86_64/primary_db                                                      | 5.7 MB  00:00:02     
+(5/12): extras/7/x86_64/prestodelta                                                   |  51 kB  00:00:01     
+(6/12): extras/7/x86_64/filelists_db                                                  | 494 kB  00:00:02     
+(7/12): extras/7/x86_64/other_db                                                      |  86 kB  00:00:00     
+(8/12): extras/7/x86_64/primary_db                                                    | 130 kB  00:00:01     
+(9/12): updates/7/x86_64/prestodelta                                                  | 406 kB  00:00:01     
+(10/12): updates/7/x86_64/filelists_db                                                | 2.1 MB  00:00:01     
+(11/12): updates/7/x86_64/other_db                                                    | 354 kB  00:00:00     
+(12/12): updates/7/x86_64/primary_db                                                  | 3.6 MB  00:00:01     
+Determining fastest mirrors
+Metadata Cache Created
+```
+
+### 4.安装epel源
+
+```{bash}
+[root@bogon yum.repos.d]# yum list | grep epel-release
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+epel-release.noarch                         7-9                        extras   
+
+[root@bogon yum.repos.d]# yum install -y epel-release
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:7-9 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package                       Arch                    Version                 Repository               Size
+=============================================================================================================
+Installing:
+ epel-release                  noarch                  7-9                     extras                   14 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total download size: 14 k
+Installed size: 24 k
+Downloading packages:
+epel-release-7-9.noarch.rpm                                                           |  14 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : epel-release-7-9.noarch                                                                   1/1 
+  Verifying  : epel-release-7-9.noarch                                                                   1/1 
+
+Installed:
+  epel-release.noarch 0:7-9                                                                                  
+
+Complete!
+[root@bogon yum.repos.d]# ls            # epel源安装成功，比原来多了一个epel.repo和epel-testing.repo文件
+Centos-7.repo  CentOS-Base-163.repo  epel.repo  epel-testing.repo  repo.bak
+```
+
+### 5.使用阿里开源镜像提供的epel源
+
+```{bash}
+[root@bogon yum.repos.d]# wget -O /etc/yum.repos.d/epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo    # 下载阿里开源镜像的epel源文件
+--2018-03-08 20:22:14--  http://mirrors.aliyun.com/repo/epel-7.repo
+Resolving mirrors.aliyun.com (mirrors.aliyun.com)... 183.2.199.237, 113.96.109.95, 113.96.109.93, ...
+Connecting to mirrors.aliyun.com (mirrors.aliyun.com)|183.2.199.237|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1084 (1.1K) [application/octet-stream]
+Saving to: ‘/etc/yum.repos.d/epel-7.repo’
+
+100%[=================================================================================================>] 1,084       --.-K/s   in 0s      
+
+2018-03-08 20:22:14 (130 MB/s) - ‘/etc/yum.repos.d/epel-7.repo’ saved [1084/1084]
+
+[root@bogon yum.repos.d]# ls
+CentOS7-Base-163.repo  Centos-7.repo  epel-7.repo  epel.repo  epel-testing.repo  repo_bak
+```
+
+### 6.再次清除系统yum缓存，并重新生成新的yum缓存
+
+```{bash}
+[root@bogon yum.repos.d]# yum clean all
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+Cleaning repos: base epel extras updates
+Cleaning up everything
+Cleaning up list of fastest mirrors
+
+[root@bogon yum.repos.d]# yum makecache
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+base                                                                                                                | 3.6 kB  00:00:00     
+epel                                                                                                                | 4.7 kB  00:00:00     
+extras                                                                                                              | 3.4 kB  00:00:00     
+updates                                                                                                             | 3.4 kB  00:00:00     
+(1/18): base/7/x86_64/group_gz                                                                                      | 156 kB  00:00:01     
+(2/18): base/7/x86_64/filelists_db                                                                                  | 6.7 MB  00:00:07     
+(3/18): base/7/x86_64/primary_db                                                                                    | 5.7 MB  00:00:06     
+(4/18): epel/x86_64/group_gz                                                                                        | 266 kB  00:00:01     
+(5/18): epel/x86_64/updateinfo                                                                                      | 899 kB  00:00:02     
+(6/18): epel/x86_64/prestodelta                                                                                     | 7.1 kB  00:00:00     
+(7/18): base/7/x86_64/other_db                                                                                      | 2.5 MB  00:00:05     
+(8/18): epel/x86_64/primary_db                                                                                      | 6.3 MB  00:00:04     
+(9/18): extras/7/x86_64/filelists_db                                                                                | 636 kB  00:00:00     
+(10/18): extras/7/x86_64/primary_db                                                                                 | 166 kB  00:00:00     
+(11/18): extras/7/x86_64/other_db                                                                                   | 108 kB  00:00:00     
+(12/18): extras/7/x86_64/prestodelta                                                                                | 102 kB  00:00:01     
+(13/18): epel/x86_64/other_db                                                                                       | 3.0 MB  00:00:01     
+(14/18): epel/x86_64/filelists_db                                                                                   |  10 MB  00:00:09     
+(15/18): updates/7/x86_64/filelists_db                                                                              | 3.5 MB  00:00:02     
+(16/18): updates/7/x86_64/prestodelta                                                                               | 771 kB  00:00:02     
+(17/18): updates/7/x86_64/other_db                                                                                  | 621 kB  00:00:00     
+(18/18): updates/7/x86_64/primary_db                                                                                | 6.0 MB  00:00:03     
+Determining fastest mirrors
+ * epel: mirrors.aliyun.com
+Metadata Cache Created
+```
+
+### 7.查看系统可用的yum源和所有的yum源
+
+```{bash}
+[root@bogon yum.repos.d]# yum repolist enabled
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+ * epel: mirrors.aliyun.com
+repo id                                            repo name                                                                         status
+base/7/x86_64                                      CentOS-7 - Base - 163.com                                                          9,591
+epel/x86_64                                        Extra Packages for Enterprise Linux 7 - x86_64                                    12,382
+extras/7/x86_64                                    CentOS-7 - Extras - 163.com                                                          390
+updates/7/x86_64                                   CentOS-7 - Updates - 163.com                                                       1,941
+repolist: 24,304
+
+[root@bogon yum.repos.d]# yum repolist all
+Loaded plugins: fastestmirror, langpacks
+Repository base is listed more than once in the configuration
+Repository updates is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+ * epel: mirrors.aliyun.com
+repo id                                     repo name                                                                       status
+base/7/x86_64                               CentOS-7 - Base - 163.com                                                       enabled:  9,591
+centosplus/7/x86_64                         CentOS-7 - Plus - 163.com                                                       disabled
+contrib/7/x86_64                            CentOS-7 - Contrib - mirrors.aliyun.com                                         disabled
+epel/x86_64                                 Extra Packages for Enterprise Linux 7 - x86_64                                  enabled: 12,382
+epel-debuginfo/x86_64                       Extra Packages for Enterprise Linux 7 - x86_64 - Debug                          disabled
+epel-source                                 Extra Packages for Enterprise Linux 7 - x86_64 - Source                         disabled
+epel-testing/x86_64                         Extra Packages for Enterprise Linux 7 - Testing - x86_64                        disabled
+epel-testing-debuginfo/x86_64               Extra Packages for Enterprise Linux 7 - Testing - x86_64 - Debug                disabled
+epel-testing-source/x86_64                  Extra Packages for Enterprise Linux 7 - Testing - x86_64 - Source               disabled
+extras/7/x86_64                             CentOS-7 - Extras - 163.com                                                     enabled:    390
+updates/7/x86_64                            CentOS-7 - Updates - 163.com                                                    enabled:  1,941
+repolist: 24,304
+```
+
+# yum.conf解读
+
+## yum 配置
+
+yum 的基础安装包包括：
+
+yum　　//RPM installer/updater
+yum-fastestmirror　　//Yum plugin which chooses fastest repository from a mirrorlist
+yum-metadata-parser　　//A fast metadata parser for yum
+
+yum 可以同时配置多个资源库(Repository)，简洁的配置文件（/etc/yum.conf），自动解决增加或删除rpm 包时遇到的依赖性问题，保持与RPM 数据库的一致性。
+　
+yum 的配置文件分为两部分：main 和repository
+
+main 部分定义了全局配置选项，整个yum 配置文件应该只有一个main。常位于/etc/yum.conf 中。
+
+repository 部分定义了每个源/服务器的具体配置，可以有一到多个。常位于/etc/yum.repo.d 目录下的各文件中。
+
+## 四、配置本地yum源
+
+1、挂载系统安装光盘
+
+`# mount /dev/cdrom /mnt/cdrom/`
+
+2、配置本地yum源
+
+`# cd /etc/yum.repos.d/`
+
+`# ls`
+
+会看到四个repo 文件
+
+## yum.conf 
+yum.conf 文件一般位于/etc目录下，一般其中只包含main部分的配置选项。
+
+使用以下命令查看yum.conf `# cat /etc/yum.conf`
+
+```
+[main]
+cachedir=/var/cache/yum
+　　//yum 缓存的目录，yum 在此存储下载的rpm 包和数据库，默认设置为/var/cache/yum
+keepcache=0
+　　//安装完成后是否保留软件包，0为不保留（默认为0），1为保留
+debuglevel=2
+　　//Debug 信息输出等级，范围为0-10，缺省为2
+logfile=/var/log/yum.log
+　　//yum 日志文件位置。用户可以到/var/log/yum.log 文件去查询过去所做的更新。
+pkgpolicy=newest
+　　//包的策略。一共有两个选项，newest 和last，这个作用是如果你设置了多个repository，而同一软件在不同的repository 中同时存在，yum 应该安装哪一个，如果是newest，则yum 会安装最新的那个版本。如果是last，则yum 会将服务器id 以字母表排序，并选择最后的那个服务器上的软件安装。一般都是选newest。
+distroverpkg=redhat-release
+　　//指定一个软件包，yum 会根据这个包判断你的发行版本，默认是redhat-release，也可以是安装的任何针对自己发行版的rpm 包。
+tolerant=1
+　　//有1和0两个选项，表示yum 是否容忍命令行发生与软件包有关的错误，比如你要安装1,2,3三个包，而其中3此前已经安装了，如果你设为1,则yum 不会出现错误信息。默认是0。
+exactarch=1
+　　//有1和0两个选项，设置为1，则yum 只会安装和系统架构匹配的软件包，例如，yum 不会将i686的软件包安装在适合i386的系统中。默认为1。
+retries=6
+　　//网络连接发生错误后的重试次数，如果设为0，则会无限重试。默认值为6.
+obsoletes=1
+　　//这是一个update 的参数，具体请参阅yum(8)，简单的说就是相当于upgrade，允许更新陈旧的RPM包。
+plugins=1
+　　//是否启用插件，默认1为允许，0表示不允许。我们一般会用yum-fastestmirror这个插件。
+bugtracker_url=http://bugs.centos.org/set_project.php?project_id=16&ref=http://bugs.centos.org/bug_report_page.php?category=yum
+
+# Note: yum-RHN-plugin doesn't honor this.
+metadata_expire=1h
+
+installonly_limit = 5
+
+# PUT YOUR REPOS HERE OR IN separate files named file.repo
+# in /etc/yum.repos.d
+```
+
+除了上述之外，还有一些可以添加的选项，如：
+
+　　exclude=selinux*　　// 排除某些软件在升级名单之外，可以用通配符，列表中各个项目要用空格隔开，这个对于安装了诸如美化包，中文补丁的朋友特别有用。
+　　gpgcheck=1　　// 有1和0两个选择，分别代表是否是否进行gpg(GNU Private Guard) 校验，以确定rpm 包的来源是有效和安全的。这个选项如果设置在[main]部分，则对每个repository 都有效。默认值为0。

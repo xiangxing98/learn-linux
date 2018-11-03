@@ -1,0 +1,132 @@
+/*
+Theme for rmd files-R Markdown Files
+*/
+
+/*Font as 微软雅黑
+
+Windows的一些：
+新細明體：PMingLiU
+細明體：MingLiU
+標楷體：DFKai-SB
+黑体：SimHei
+宋体：SimSun
+新宋体：NSimSun
+仿宋：FangSong
+楷体：KaiTi
+仿宋_GB2312：FangSong_GB2312
+楷体_GB2312：KaiTi_GB2312
+微軟正黑體：Microsoft JhengHei
+微软雅黑体：Microsoft YaHei
+
+装Office会生出来的一些：
+隶书：LiSu
+幼圆：YouYuan
+华文细黑：STXihei
+华文楷体：STKaiti
+华文宋体：STSong
+华文中宋：STZhongsong
+华文仿宋：STFangsong
+方正舒体：FZShuTi
+方正姚体：FZYaoti
+华文彩云：STCaiyun
+华文琥珀：STHupo
+华文隶书：STLiti
+华文行楷：STXingkai
+华文新魏：STXinwei
+
+*/
+body,form,div,ul,ol,li,h1,h2,h3,h4,h5,h6,table,tr,th,td,p,input,dl,dt,dd,ul,ol,li,input,textarea { 
+font-family:"Microsoft Yahei", "微软雅黑"!important;}
+
+*{
+font-family:"Microsoft Yahei";
+}
+
+/* IMAGES
+=============================================================================*/
+
+/*Head 2*/
+.section h2 {
+    text-align: left;
+    color: #DD0000;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 3px dashed #eee;
+    margin-bottom: 10px;
+    line-height: 100%;
+    padding-bottom: 10px
+}
+.section h1{
+    font-size: 28px;
+}
+
+h1.title{
+    font-size: 28px;
+}
+
+img {
+  max-width: 100%
+}
+
+/*Images Class*/
+.figure{
+text-align:center;
+}
+
+/*Images Title Class*/
+.caption{
+text-align:center;
+color:#DD0000;
+font-size:14px;
+font-weight:bold;
+}
+
+/*blockquote*/
+pre,blockquote,.code{
+font-size:14px;
+color:#CCCCCC;}
+blockquote{
+	
+}
+
+blockquote {
+    display: block;
+    position: relative;
+    font-size: 18px;
+    color: #999;
+	border-left:none;
+	padding: 0px 0px 0px 30px;
+    margin: 20px 0;
+}
+
+blockquote:before {
+    content: "";
+    display: inline-block;
+    height: 14px;
+    width: 18px;
+    background-image: url(https://gss0.bdstatic.com/5bd1bjqh_Q23odCf/static/newsdetail/img/BdrainrwLandingMainContent/quote.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+}
+
+strong{
+	font-size: 18px;
+	color: #333;
+	font-weight: bold
+	/*font-weight: 900*/
+}
+
+/*
+不用那个扩展，纯代码方法。此方法同样适用于360安全浏览器，本人亲测，其他没试过。
+以下是强制使用微软雅黑的方法：复制下面的代码： 
+@charset "utf-8";body * {
+font-family: "Microsoft YaHei","weiruanyahei",Tahoma,SimSun !important;
+
+在记事本里面粘贴，把记事本的扩展txt改成css，保存，然后把这个css文件放在如下目录：
+D:\Program Files\360Chrome\Chrome\User Data\Default\User StyleSheets       。
+可能你的安装目录和我不一样，但也只是前面的不一样，后面的都一样。
+这样不需要安装扩展，并且强制所有网页使用微软雅黑。
+*/
