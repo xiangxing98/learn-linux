@@ -2,13 +2,20 @@
 
 [Learn-Linux site](http://xiangxing98.github.io/learn-linux/)
 
-[20181028-Install-R-RstudioServer-Git-In-CentOS7](http://xiangxing98.github.io/learn-linux/20181028-Install-R-RstudioServer-Git-In-CentOS7.nb.html)
+[20181028-Install-R-RstudioServer-Git-In-CentOS7.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181028-Install-R-RstudioServer-Git-In-CentOS7.nb.html)
 
-[20181028-Use_VIM_in_CentOS7.nb.html](http://xiangxing98.github.io/learn-linux/20181028-Use_VIM_in_CentOS7.nb.html)
+[20181028-Use_VIM_in_CentOS7.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181028-Use_VIM_in_CentOS7.nb.html)
 
-[20181028-YUM-Install-Software-In-CentOS.nb.html](http://xiangxing98.github.io/learn-linux/20181028-YUM-Install-Software-In-CentOS.nb.html)
+[20181028-YUM-Install-Software-In-CentOS.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181028-YUM-Install-Software-In-CentOS.nb.html)
 
-[20181029-Linux_Basics_Questions](http://xiangxing98.github.io/learn-linux//20181029-Linux_Basics_Questions.nb.html)
+[20181029-Linux_Basics_Questions.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181029-Linux_Basics_Questions.nb.html)
+
+[20181101-mailR_Package_Send_Mail.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181101-mailR_Package_Send_Mail.nb.html)
+
+[20181103-Basic_Linux_Commands_You_Must_Know.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181103-Basic_Linux_Commands_You_Must_Know.nb.html)
+
+[20181103-Configure_YUM_Repository_And_EPEL_Repository_In_CentOS7.nb.html](http://xiangxing98.github.io/learn-linux/CentOS/20181103-Configure_YUM_Repository_And_EPEL_Repository_In_CentOS7.nb.html)
+
 
 [罗辑思维记录](http://www.ljsw.cc/)
 
