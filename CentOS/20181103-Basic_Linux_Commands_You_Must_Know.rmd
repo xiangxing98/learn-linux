@@ -2,9 +2,9 @@
 title: "2018-11-03-Basic_Linux_Commands_You_Must_Know"
 output:
   html_notebook:
-    css: rmd_theme.css
-    highlight: tango
-    theme: readable
+    css: ../rmd_theme.css
+    highlight: kate
+    theme: spacelab
     toc: yes
     toc_depth: 4
   html_document:
@@ -14,13 +14,8 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, highlight = TRUE)
 ```
-
-> 文章源自：29 Linux Commands You Must Know
-> 译文源自：http://www.ido321.com/1609.html
-> 29个你必须知道的Linux命令
-> 新手指南： Linux 新手应
 
 # Basic_Linux_Commands_You_Must_Know
 
@@ -37,7 +32,7 @@ knitr::opts_chunk$set(echo = TRUE)
 man 是 Linux 的帮助手册，即 manual 。因为大多数程序都会自带手册，所以可以通过 man 命令获取帮助。执行以后，在 man page 页面中按 q 退出。
 
 比如你想知道ls命令的用法和选项，可以在终端执行“man ls”,获取 ls 的帮助
-```{bash}
+```{sh}
 man ls
 
 root@devopscube:~# man ls
@@ -57,14 +52,14 @@ DESCRIPTION
 ```
 
 查看有多少（针对不同方面的）同名手册
-```
+```{sh}
 $ man -f ls
 ls (1)               - list directory contents
 ls (1p)              - list directory contents
 ```
 
 查看特定的手册
-```
+```{sh}
 $ man 1p ls
 ```
 
@@ -72,18 +67,18 @@ $ man 1p ls
 与 man 不同的是，可以像浏览网页一样在各个节点中跳转。
 
 从文档首页开始浏览
-```
+```{sh}
 $ info
 ```
 获取特定程序的帮助
-```
+```{sh}
 $ info program
 ```
 
 ### help
 
 除了上面的两种方法外，还有一种简单使用的方法，那就是 –help 参数，一般程序都会有这个参数，会输出最简单有用的介绍。
-```
+```{sh}
 $ man --help       ### 获取 man 的帮助
 $ info --help      ### 获取 info 的帮助
 $ ls --help        ### 获取 ls 的帮助
@@ -95,7 +90,7 @@ $ ls --help        ### 获取 ls 的帮助
 
 在 Terminal（终端） 中，有许多操作技巧，这里就介绍几个简单的。
 ### 终端简单操作
-```
+```{sh}
 up(方向键上) 可以调出输入历史执行记录，快速执行命令
 down(方向键下) 配合 up 选择历史执行记录
 Home 移动光标到本行开头
@@ -126,7 +121,7 @@ Tab 补全是非常有用的一个功能，可以用来自动补全命令或文�
 ls会列举出当前工作目录的内容（文件或文件夹），就跟你在GUI中打开一个文件夹去看里面的内容一样。
 
 ls 即 list ，列出文件。
-```{bash}
+```{sh}
 $ ls       ### 仅列出当前目录可见文件
 $ ls -l    ### 列出当前目录可见文件详细信息,长列表
 $ ls -hl   ### 列出详细信息并以可读大小显示文件大小,详细信息
@@ -137,7 +132,7 @@ $ ls -al   ### 列出所有文件（包括隐藏）的详细信息
 ## 2. mkdir – Make Directory
 
 mkdir <new-directory-name>创建一个新目录，用于新建文件夹。
-```
+```{sh}
 $ mkdir folder
 $ mkdir -p folder/subfolder    ### -p 参数为当父目录存在时忽略，若不存在则建立，用此参数可建立多级文件夹
 ```
@@ -146,7 +141,7 @@ $ mkdir -p folder/subfolder    ### -p 参数为当父目录存在时忽略，若
 
 ## 3. pwd – Print Working Directory
 pwd显示当前工作目录，用于返回当前工作目录的名字，为绝对路径名。
-```
+```{sh}
 $ pwd
 /home
 ```
@@ -157,7 +152,7 @@ $ pwd
 
 cd 是打开某个路径的命令，也就是打开某个文件夹，并跳转到该处。
 
-```
+```{sh}
 $ cd path      ### path 为你要打开的路径。
 # $ cd(change directory) 切换文件夹，这个应该是最常用的 
 $ cd - # 返回刚才的目录 
@@ -174,7 +169,7 @@ rmdir <directory-name>删除给定的目录。
 rm 即 remove ，删除文件。
 rm <file-name>会删除给定的文件或文件夹，可以使用rm -r <directory-name>递归删除文件夹
 
-```
+```{sh}
 $ rm filename      ### 删除 filename
 $ rm -i filename   ### 删除 filename 前提示，若多个文件则每次提示
 $ rm -rf folder/subfolder/  ### 递归删除 subfolder 下所有文件及文件夹，包括 subfolder 自身
@@ -188,7 +183,7 @@ cp 即 copy ，复制文件。
 cp <source-file> <destination-file>命令对文件或文件夹进行复制
 
 可以使用cp -r <source-folder> <destination-folder> 选项来递归复制文件夹。
-```
+```{sh}
 $ cp source dest            ### 将 source 复制到 dest
 $ cp folder/*  dest         ### 将 folder 下所有文件(不含子文件夹中的文件)复制到 dest
 $ cp -r folder  dest        ### 将 folder 下所有文件（包含子文件夹中的所有文件）复制到 dest
@@ -200,7 +195,7 @@ mv 即 move ，移动文件。
 mv <source> <destination>命令对文件或文件夹进行移动
 如果文件或文件夹存在于当前工作目录，还可以对文件或文件夹进行重命名。
 
-```
+```{sh}
 $ mv source  folder        ### 将 source 移动到 folder 下，完成后则为  folder/source
 $ mv -i source folder      ### 在移动时，若文件已存在则提示 **是否覆盖**
 $ mv source dest           ### 在 dest 不为目录的前提下，重命名 source 为 dest
@@ -223,7 +218,7 @@ head -n 5 hello_world.txt
 tail -n 5 hello_world.txt 
 ~~~~~~~~~~
 
-```{bash}
+```{sh}
 $ cat /etc/locale.gen     ### 输出 locale.gen 的内容
 $ cat -n /etc/locale.gen  ### 输出 locale.gen 的内容并显示行号
 $ cat /proc/version ### 系统信息 
@@ -248,13 +243,13 @@ grep 主要用于返回匹配的项目，支持正则表达式。Grep命令非�
         grep "Mathew" test.txt
 ~~~~~~~~~~
 
-```
+```{sh}
 $ grep PATTERN filename      ## 返回所有含有 PATTERN 的行
 $ grep zh_CN /etc/locale.gen ## 返回所有含 zh_CN 的行
 ```
 
 
-```{bash}
+```{sh}
 root@devopscube:~# grep "dennis" test.txt
 # 4 dennis start beginner jul
 ```
@@ -304,7 +299,7 @@ find <folder-to-search> -iname <file-name>
 
 find命令用来检索文件，可以用“-name”选项来检索指定名称的文件：
 
-```
+```{sh}
 find -name  find -name test.txt
 
 root@devopscube:/home/ubuntu# cd ~
@@ -316,7 +311,7 @@ root@devopscube:~# find -name test.txt
 你也可以用“/ -name”来检索指定名称的文件夹：
 find / -name passwd
 
-```
+```{sh}
 root@devopscube:~# find / -name passwd
 /etc/cron.daily/passwd
 /etc/pam.d/passwd
@@ -344,7 +339,7 @@ tar 主要用于创建归档文件，和解压归档文件，其本身是没有�
     -z 调用 gzip 进行解压缩
     -t 列出归档中的文件
     
-```{bash}
+```{sh}
 $ tar -cvf filename.tar .       ## 将当前目录所有文件归档，但不压缩，注意后面有个 ’.‘ ，不可省略，代表当前目录的意思
 $ tar -xvf filename.tar         ## 解压 filename.tar 到当前文件夹
 $ tar -cvjf filename.tar.bz2 .  ## 使用 bzip2 压缩
@@ -357,7 +352,7 @@ $ tar -tf   filename            ## 只查看 filename 归档中的文件，不�
 
 让我们将test.txt文件打包：
 
-```{bash}
+```{sh}
 # tar -cf test.tar test.txt
 root@devopscube:~# tar -cf test.tar test.txt
 root@devopscube:~# ls
@@ -365,7 +360,7 @@ test.tar  test.txt
 ```
 
 用“-C”选项将刚才打包好的test.tar文件解压缩至“demo”目录：
-```{bash}
+```{sh}
 tar -xf test.tar -C /root/demo/
 
 root@devopscube:~# tar -xf test.tar -C /root/demo/
@@ -398,7 +393,7 @@ exit用于结束当前的终端会话。
 ping <remote-host-address>通过发送数据包ping远程主机(服务器)，常用与检测网络连接和服务器状态。
 
 ping 主要用于测试网络连通，通过对目标机器发送数据包来测试两台主机是否连通，及延时情况。
-```
+```{sh}
 $ ping locez.com    ## 通过域名 ping，若 DNS 未设置好，可能无法 ping 通
 $ ping linux.cn
 PING linux.cn (211.157.2.94) 56(84) bytes of data.
@@ -420,27 +415,72 @@ who能列出当前登录的用户名。
 su <username>用于切换不同的用户。即使没有使用密码，超级用户也能切换到其它用户。
 
 ## 24. uname
-uname会显示出关于系统的重要信息，如内核名称、主机名、内核版本、处理机类型等等，使用uname -a可以查看所有信息。
+uname会显示出关于系统的重要信息，如内核名称、主机名、内核版本、处理机类型等等，使用uname -a可以查看所有信息。get name and information about current kernel
 
 ## 25. free – Free memory
-free会显示出系统的空闲内存、已经占用内存、可利用的交换内存等信息，free -m将结果中的单位转换成KB，而free –g则转换成GB。
+free会显示出系统的空闲内存、已经占用内存、可利用的交换内存等信息，free -m将结果中的单位转换成KB，而free –g则转换成GB。get name and information about current kernel
 
 ## 26. df – Disk space Free
-df查看文件系统中磁盘的使用情况–硬盘已用和可用的存储空间以及其它存储设备。你可以使用df -h将结果以人类可读的方式显示。
+df查看文件系统中磁盘的使用情况–硬盘已用和可用的存储空间以及其它存储设备。你可以使用df -h将结果以人类可读的方式显示。report free disk space
+
 
 ## 27. ps – ProcesseS
-ps显示系统的运行进程。
+ps显示系统的运行进程。report free disk space
+
 
 ## 28. Top – TOP processes
 top命令会默认按照CPU的占用情况，显示占用量较大的进程,可以使用top -u <username>查看某个用户的CPU使用排名情况。
 
 ## 29. shutdown
+
 shutdown用于关闭计算机，而shutdown -r用于重启计算机。
+
+shutdown是最安全的关机和重启命令，平时使用时推荐使用shutdown命令关机和重启。
+
+###shutdown语法
+
+`shutdown [选项] [参数]`
+
+【详解】shutdown是最安全的关机和重启命令，平时使用时推荐使用shutdown命令关机。而且该命令支持定时操作。
+
+### shutdown选项
+
+| 选项         | 相应功能                                                 |
+| ------------ | -------------------------------------------------------- |
+| -a           | 指定权限                                                 |
+| -r 	         |  重启计算器（和reboot）命令一样                          |
+| -k 	         |  模拟关机（只向用户发出警告信息，但不关机）              |
+| -h 	         |  关闭计算机并关闭电源（常用）                            |
+| -n 	         |  不调用init进程关闭计算机（不推荐）                      |
+| -c 	         |  取消正在执行的关机命令                                  |
+| -f 	         |  重启计算机，但不进行磁盘检测                            |
+| -F 	         |  重启计算机，进行磁盘检测                                |
+| -t(秒) 	     |  指定发出警告信息与删除信息时要延迟的秒数                |
+
+【附加参数】
+
+### shutdown参数 	
+时间 	指关闭计算机的时间。可以为详细时间，如22：00，晚上10点关闭计算机, 也可以作为详细分钟，如“+5”，则5分钟后关机。
+警告信息 	可以是任意文本，信息，需要引号括起来才能使用。
+
+### shutdown例子：
+(1)、通过shutdown命令重启计算机（加now则是立即重启）
+`shutdown -r now`
+
+(2)、设置1分钟以后关闭计算机，并在SSH中提示“1 minute after shutdown”
+`shutdown -h +1 "1 minute after shutdown"`
+
+(3)、取消关机
+
+若需要取消关机、重启操作，在SSH中可按Ctrl+C快捷键取消正在执行的命令。
+
+当然若重新登陆了SSH或其它情况，可通过一下代码取消（定时）关机。
+`shutdown -c `
 
 ## 30. more-显示更多，Cat
 
 more 与 cat 相似，都可以查看文件内容，所不同的是，当一个文档太长时， cat 只能展示最后布满屏幕的内容，前面的内容是不可见的。这时候可用 more 逐行显示内容。
-```
+```{sh}
 $ more /etc/locale.gen
 $ more +100 /etc/locale.gen       ### 从 100 行开始显示
 ```
@@ -456,7 +496,7 @@ less 与 more 相似，不过 less 支持上下滚动查看内容，而 more 只
         more <filename>
 ~~~~~~~~~~
 
-```
+```{sh}
 $ less /etc/locale.gen
 $ less +100 /etc/locale.gen
 less demo.txt
@@ -466,7 +506,7 @@ more demo.txt
 
 ## 32. nano
 nano 是一个简单实用的文本编辑器，使用简单。
-```
+```{sh}
 $ nano  filename       ### 编辑 filename 文件，若文件不存在，则新打开一个文件，若退出时保存，则创建该文件
 ```
 
@@ -475,14 +515,14 @@ $ nano  filename       ### 编辑 filename 文件，若文件不存在，则新�
 
 ## 33. reboot
 reboot 为重启命令。
-```
+```{sh}
 # reboot         ### '$' 和 '#' 的区别在于 '$' 普通用户即可执行
                  ### 而 '#' 为 root 用户才可执行，或普通用户使用 'sudo'
 ```
 
 ## 34. poweroff
 poweroff 为关机命令。
-```
+```{sh}
 # poweroff  ### 马上关机
 ```
 
@@ -490,17 +530,22 @@ poweroff 为关机命令。
 mount 用于挂载一个文件系统，需要 root 用户执行。一个磁盘可分为若干个分区，在分区上面可以创建文件系统，而挂载点则是提供一个访问的入口，将一个分区的文件系统挂载到某个目录中，称这个目录为挂载点，并且可以通过这个挂载点访问该文件系统中的内容。
 
 例如一块硬盘在 Linux 中表示为 /dev/sda 那么它上面的分区应该表示为 /dev/sda1 、/dev/sda2 。
-```
+
+```{sh}
 # mount                       ## 输出系统目前的挂载信息
 # mount /dev/sda1 /mnt        ## 将 sda1 挂载到 /mnt 中
 # cd /mnt                     ## 直接通过 /mnt 访问内容
 # mount -o remount,rw  /mnt   ## 重新挂载 sda1 到 /mnt 并设置为 可读写
 # mount -a                    ## 挂载 fstab 文件配置好的文件系统
+
+# Win10 Sharing Folder
+# mount /mnt/hgfs/CentOS_Sharing/
+# ls /mnt/hgfs/CentOS_Sharing/
 ```
 
 ## 36. umount卸载一个挂载点
 umount 与 moung 相反，是卸载一个挂载点，即取消该入口。
-```
+```{sh}
 # umount /mnt                 ## 卸载 /mnt 这个挂载点的文件系统
 # umount -a                   ## 卸载所有已挂载的文件系统
 ```
@@ -515,7 +560,7 @@ ln 主要用于在两个文件中创建链接，链接又分为 Hard Links (硬�
 
 硬链接只可链接两个文件，不可链接目录，而软链接可链接目录，所以软链接是非常灵活的。
     
-```
+```{sh}
 $ ln source dest       ## 为 source 创建一个名为 dest 的硬链接
 $ ln -s source dest    ## 为 source 创建一个名为 dest 的软链接
 ```
@@ -523,7 +568,7 @@ $ ln -s source dest    ## 为 source 创建一个名为 dest 的软链接
 ## 38. chown-Change Owner
 
 chown 用于改变一个文件的所有者及所在的组。
-```
+```{sh}
 # chown user filename        ## 改变 filename 的所有者为 user
 # chown user:group filename  ## 改变 filename 的所有者为 user，组为 group
 # chown -R root folder       ## 改变 folder 文件夹及其子文件的所有者为 root
@@ -540,14 +585,14 @@ chmod命令用来改变文件的读/写/执行权限，权限数值如下所示�
 
 下面的命令可以给test.txt文件赋最高的权限：
 
-```{bash}
+```{sh}
 chmod 755 test.txt
 sudo chmod 777 -R .git/*
 ```
 
 chmod 永远更改一个文件的权限，主要有 读取 、 写入 、 执行 ，三种权限，其中 所有者 、 用户组 、 其他 各占三个，因此 ls -l 可以看到如下的信息
 
-```
+```{sh}
 -rwxr--r-- 1 locez users   154 Aug 30 18:09 filename
 
 # 其中 r=read ， w=write ， x=execute
@@ -563,21 +608,40 @@ chmod 永远更改一个文件的权限，主要有 读取 、 写入 、 执行
 ## 40. useradd
 useradd 用于添加一个普通用户。
 
-```
+```{sh}
 # useradd -m -g users -G audio -s /usr/bin/bash newuser     
 ## -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名 
+
+# 现在开始新建共享文件夹的用户willy，使用命令“useradd willy”，如下
+useradd willy
+
+# 使用命令“passwd willy”，对用户添加密码，如下
+passwd willy
+
+# 使用命令“mkdir /home/willy/myshare”，
+# 在用户willy文件夹下新建“myshare”共享文件夹，（中途以willy用户进入了系统，所以多了很多中文文件夹）
+cd ~
+mkdir /home/willy/myshare
+
+cd /home/willy/
+ls
+
+# 使用命令“chmod -R 777 /home/willy/myshare”,
+# 将整个myshare文件夹与其中的文件和子目录的权限都设置为rwxrwxrwx，即所有人都可以查看操作
+chmod -R 777 /home/willy/myshare
+
 ```
 
 ## 41. passwd
 passwd 用于改变用户登录密码。
-```
+```{sh}
 $ passwd                 ## 不带参数更改当前用户密码
 # passwd newuser         ## 更改上述新建的 newuser 的用户密码
 ```
 
 ## 42. whereis
 whereis 用于查找文件、手册等。
-```
+```{sh}
 $ whereis bash 
 bash: /usr/bin/bash /etc/bash.bashrc /etc/bash.bash_logout /usr/share/man/man1/bash.1.gz /usr/share/info/bash.info.gz 
 $ whereis -b bash       ## 仅查找 binary 
@@ -587,7 +651,7 @@ bash: /usr/share/man/man1/bash.1.gz /usr/share/info/bash.info.gz
 ```
 ## 43. find
 find 也用于查找文件，但更为强大，支持正则，并且可将查找结果传递到其他命令。
-```
+```{sh}
 $ find . -name PATTERN    ## 从当前目录查找符合 PATTERN 的文件 
 $ find /home -name PATTERN -exec ls -l {} /;  # 从 /home 文件查找所有符合 PATTERN 的文件，并交由 ls 输出详细信息 
 ```
@@ -595,7 +659,7 @@ $ find /home -name PATTERN -exec ls -l {} /;  # 从 /home 文件查找所有符�
 ## 44. wget
 
 wget 是一个下载工具，简单强大。
-```
+```{sh}
 $ wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ## 下载 README 文件并重命名为 newname.md 
 $ wget -c url     ## 下载 url 并开启断点续传 
 ```
@@ -610,7 +674,7 @@ touch demo.txt
 vi(visual) # 新建文本文档 输入完成后，按Esc后insert消失，然后输入:wq，write & quit Enter退出 
 ~~~~~~~~~~
 
-```{bash}
+```{sh}
 root@devopscube:~# touch demo.txt
 root@devopscube:~# ls
 demo.txt
@@ -635,7 +699,7 @@ sort -k2 test.txt
 ~~~~~~~~~~
 
 排序结果
-```{bash}
+```{sh}
 root@devopscube:~# sort -k2 test.txt
 45 Dave level expert dec
 4 dennis start beginner jul
@@ -647,7 +711,7 @@ root@devopscube:~# sort -k2 test.txt
 
 第一列是数字，如果你想按数字排序，可以使用“-h”选项。如果数字在不同列上，你可以在“-h”选项后使用“-k”选项：
 
-```{bash}
+```{sh}
 root@devopscube:~# sort -h test.txt  
 1 mike level intermediate jan
 4 dennis start beginner jul
@@ -658,7 +722,7 @@ root@devopscube:~# sort -h test.txt
 ```
 
 最后一列是月份，你可以使用“-M”选项来让文件内容按月份排序：
-```{bash}
+```{sh}
 root@devopscube:~# sort -k5 -M test.txt
 1 mike level intermediate jan
 7 Megan employee trainee feb
@@ -671,7 +735,7 @@ root@devopscube:~# sort -k5 -M test.txt
 注：如果你想消除重复的行，可以在sort命令后使用“-u”选项。
 
 使用“-r”选项，是文件倒序排列：
-```{bash}
+```{sh}
 root@devopscube:~# sort -h -r test.txt
 58 Mathew Head CEO nov
 45 Dave level expert dec
@@ -690,7 +754,7 @@ diff命令用来找出2个文件的不同点。diff命令通过分析文件内�
         diff test.txt test1.txt
 ~~~~~~~~~~
 
-```{bash}
+```{sh}
 root@devopscube:~# diff test.txt test1.txt
 7c7
 < 59 sdfsd
@@ -722,7 +786,7 @@ sed 是一种在线编辑器，它一次处理一行内容。处理时，把当�
 语法: sed 's/<old-word>/<new-word>/' test.txt
 ~~~~~~~~~~
 例如，在test.txt文件中用“michael”替换“mike”：
-```{bash}
+```{sh}
 # sed 's/mike/michael/' test.txt
 
 root@devopscube:~# sed 's/mike/michael/' test.txt
@@ -734,6 +798,9 @@ root@devopscube:~# sed 's/mike/michael/' test.txt
 58 Mathew Head CEO nov
 ```
 
+## Reference
 
-> 文章源自：29 Linux Commands You Must Know
-> 译文源自：http://www.ido321.com/1609.html
+> - 文章参考：[29个你必须知道的Linux命令](http://blog.51cto.com/yangzong/1680730)
+
+> - 译文源自：[29 Linux Commands You Must Know](http://www.ido321.com/1609.html)
+

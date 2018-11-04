@@ -1,0 +1,157 @@
+---
+title: "20181104-Linux_Commands_Sed"
+output:
+  html_notebook:
+    css: ../rmd_theme.css
+    highlight: kate
+    theme: spacelab
+    toc: yes
+    toc_depth: 4
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, highlight = TRUE)
+```
+
+# 15个流命令sed详解centos7
+
+## 1.以行范围查看文献
+
+使用 head and tail来查看文件
+```{sh}
+# sed -n '5,10p' myfile.txt
+```
+
+## 2. 以排除给定范围查看文件
+
+```{sh}
+# sed '20,35d' myfile.txt
+```
+
+## 3. 间断范围的查看
+```{sh}
+# sed -n -e '5,7p' -e '10,13p' myfile.txt
+```
+## 4. 替换词和字符
+
+用story替换version
+```{sh}
+# sed 's/version/story/g' myfile.txt
+```
+也可以用gi代替g
+```{sh}
+# sed 's/version/story/gi' myfile.txt
+```
+替换多个空格，例如：ip route show
+```{sh}
+# ip route show | sed 's/  */ /g'
+```
+## 5. 在范围内替换词和字符
+
+wKiom1gn8LmRlQSyAAAZfaqKrjc763.png
+
+以下为30-40行内的替换
+```{sh}
+# sed '30,40 s/version/story/g' myfile.txt
+```
+
+## 6. 使用正则表达式 – I
+
+以下为：移除以*开始的空行
+```{sh}
+# sed '/^#\|^$\| *#/d' httpd.conf
+```
+
+## 7. 使用正则表达式 – II
+
+替换单词首字母小写为大写
+```{sh}
+# sed 's/[Zz]ip/rar/g' myfile.txt
+```
+
+## 8. 用一个给定的模式查看行内容
+
+如以Jul 2 开始的行
+```{sh}
+# sed -n '/^Jul  1/ p' /var/log/secure
+```
+
+
+## 9. 在文件中插入空格
+
+以下为插入一个空行
+```{sh}
+# sed G myfile.txt
+```
+
+以下为插入两个空行
+```{sh}
+# sed 'G;G' myfile.txt
+```
+
+## 10. 模拟dos2Unix在内部编辑
+
+```{sh}
+# sed -i 's/\r//' myfile.txt
+```
+
+编辑文件用 Ctrl+V和Ctrl+M.
+wKiom1gn-IWijgFWAAARkTVf4-8241.png
+
+## 11. 备份和替换编辑文件
+
+用-i选项，重命名文件
+```{sh}
+# sed -i'.orig' 's/this/that/gi' myfile.txt
+```
+wKioL1gn-evx5bE3AAAezHouFws949.png-wh_50
+
+## 12. 词开关对
+
+例如：First name, Last name
+```{sh}
+# sed 's/^\(.*\),\(.*\)$/\2\, \1/g' names.txt
+```
+
+显示开始直到逗号
+
+放置正确的位置在行尾
+
+## 13. 用一个分隔符替换词
+
+例如：
+
+We need to start partying at work, but
+let’s remember to start all services first.
+
+start替换成stop：
+```{sh}
+# sed '/services/ s/start/stop/g' msg.txt
+```
+
+wKiom1goCQfAxjMUAAASJLOHqxM331.png
+
+## 14. 一次完成更多的子命令
+```{sh}
+# sed -i 's/that/this/gi;s/line/verse/gi' myfile.txt/span>
+```
+
+wKiom1goCQfAxjMUAAASJLOHqxM331.png
+
+## 15. 同其它命令结合
+
+```{sh}
+# ip route show | sed -n '/src/p' | sed -e 's/  */ /g' | cut -d' ' -f9/span>
+```
+
+wKiom1goCL3wt3U0AAAbcAmiDAU519.png
+
+## Reference
+
+> - 文章参考：[15个流命令sed详解(centos7)](http://blog.51cto.com/risingair/1872296)
+
+
